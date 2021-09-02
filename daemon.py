@@ -1,3 +1,5 @@
+# 参考：https://qiita.com/KosukeJin/items/e626ddda850aa8407cee
+
 import argparse
 import os
 import subprocess
