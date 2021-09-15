@@ -8,7 +8,7 @@ input_path  = '/your/video/path.mp4'
 output_path = '/output/video/path.mp4'
 target_scale = (1920, 1080)
 start_time = 0.00
-end_time   = 120.00
+end_time   = None
 
 start_time = FF_Utils.time_decode(start_time)
 end_time = FF_Utils.time_decode(end_time)
