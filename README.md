@@ -8,4 +8,3 @@
 - [scheduler.py](scheduler.py): cronのように指定した時間に関数を呼び出す。呼び出し側の親プロセスが必要なので、[daemon.py](daemon.py)と組み合わせるといいかもしれない。
 - [ffmpeg.py](ffmpeg.py): ffmpegのラッパー。パスのエスケープはWindows向けになっているので、別環境では要修正。
 - [waifu2x.py](waifu2x.py): waifu2x-caffe-cuiのラッパー。
-- 
