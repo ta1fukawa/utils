@@ -1,8 +1,8 @@
 import os
 import json
 import tkinter as tk
-import ctypes
-ctypes.windll.shcore.SetProcessDpiAwareness(2)
+#import ctypes
+#ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
 class App:
     def __init__(self, data_filepath):
@@ -11,12 +11,12 @@ class App:
         self.zaisitsu_gakubans = {}         # 在室学生の学籍番号
         self.grade_area = {}                # 学年領域
 
-        self.max_cols = 5  # 名前の最大列数（ディスプレイによって調整する）
+        self.max_cols = 20  # 名前の最大列数（ディスプレイによって調整する）
 
         self.grades = ['teacher', 'd', 'm2', 'm1', 'b4', 'b3']
 
         self.grade_title = {
-            'teacher': '教員',
+            'teacher': 'Prof.',
             'd': 'Dr.',
             'm2': 'M2',
             'm1': 'M1',
@@ -34,7 +34,7 @@ class App:
         }
 
         self.window = tk.Tk()
-        self.window.attributes('-fullscreen', True)  
+        self.window.attributes('-fullscreen', True)
         self.fullScreenState = False
         self.window.bind("<F11>", self.toggleFullScreen)
         self.window.bind("<Escape>", self.quit)
@@ -87,7 +87,7 @@ class App:
         self.window.after(1000, self.check_update)
 
     def update_data(self):
-        with open(self.data_filepath, 'r', encoding='utf-8') as f:
+        with open(self.data_filepath, 'r', encoding='utf-8-sig') as f:
             data = json.load(f)
 
         for gakuban in list(self.zaisitsu_gakubans.keys()):
@@ -126,8 +126,8 @@ class App:
             self.grade_area[person['grade']] = grade_area
 
             # 学年のタイトルを作成
-            grade_title = tk.Label(grade_area, text=self.grade_title[person['grade']], font=('Noto Sans CJK JP Thin', 10 * self.display_rate), background='#222222', foreground=self.color_map[person['grade']]['fg'], width=1 * self.display_rate)
-            grade_title.pack(side=tk.LEFT, padx=(0, 20 * self.display_rate))
+            grade_title = tk.Label(grade_area, text=self.grade_title[person['grade']], font=('Noto Sans CJK JP Thin', 8 * self.display_rate), background='#222222', foreground=self.color_map[person['grade']]['fg'], width=int(4 + 0.25 * self.display_rate))
+            grade_title.pack(side=tk.LEFT, padx=0)
 
             # 学年の名前領域を作成
             grade_grid = tk.Frame(grade_area, background='#222222')
@@ -163,7 +163,7 @@ class App:
         label = self.zaisitsu_gakubans[gakuban]
         grade_grid = label.master
         grade_area = grade_grid.master
-            
+
         # 名前を見つけて削除
         number = grade_grid.winfo_children().index(label)
         label.destroy()
@@ -188,4 +188,4 @@ class App:
                     break
 
 if __name__ == '__main__':
-    app = App('data.json')  
+    app = App('status.json')
