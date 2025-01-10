@@ -5,7 +5,7 @@
 def sanitize_filename(filename, replace_to=None):
     replacements = {'\\': '¥', '/': '／', ':': '：', '*': '＊', '?': '？', '"': '”', '<': '＜', '>': '＞', '|': '｜', '\0': ''}
     if replace_to is not None:
-        replacements = {k: replace_to for k in default_replacements}
+        replacements = {k: replace_to for k in replacements}
     for original, replacement in replacements.items():
         filename = filename.replace(original, replacement)
     return filename
